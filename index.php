@@ -15,7 +15,7 @@
 <body>
     <!-- Splash Screen -->
     <!-- <div class="wrapper-splash"><div class="follow-the-leader"><div></div><div></div><div></div><div></div></div></div> -->
-    <header data-js-header>sadfs
+    <header data-js-header>
         <div>
             <img src="imgs/e-ciclo-vetor.svg" alt="Logo">
         </div>
@@ -97,7 +97,7 @@
             <article class="box-btns-crud">
                 <button class="crud-btn-criar" data-js-btnTabFormsTables>Criar Novo</button>
             </article>
-            <form method="POST" action="" class="box-form-crud" data-js-frmTabFormsTables>
+            <form method="POST" action="inserir_dados.php" class="box-form-crud" data-js-frmTabFormsTables>
                 <h1>Cadastrar Usuários</h1>
                 <input type="text" placeholder="Nome" class="txtNomeUsuario"name="nome">
                 <input type="text" placeholder="Sobrenome" class="txtSobreNomeUsuario"name="sobrenome">
@@ -117,12 +117,12 @@
                     <option value="sc">SC</option>
                 </select>
                 <button class="btnLimparCadastro">Limpar</button>
-                <a href="http://localhost/pedro/crud-ods13/">
+                <a href="">
                     <input type="submit" value="CadastrarUsuario" class="btnSubmitCadastrar" name="CadastrarUsuario">
                 </a>
                 <?php
                 require_once('01-conexao.php'); 
-                require_once('02-inserirDados.php');
+                require_once('dados_consumidor.php');
                     if(isset($_POST['CadastrarUsuario'])){                        
                         inserir_dadosUsuario();
                     }
@@ -200,10 +200,11 @@
                     <option value="sc">SC</option>
                 </select>
                 <button class="btnLimparCadastro">Limpar</button>
-                <a href="http://localhost/crud-ods13/"name="CadastrarEmpresa">
+                <a href=""name="CadastrarEmpresa">
                 <input type="submit" value="Cadastrar" class="btnSubmitCadastrar"name="CadastrarEmpresa">
                 </a>
                 <?php
+                require_once('dados_empresas.php');
                     if(isset($_POST['CadastrarEmpresa'])){                        
                         inserir_Empresa();
                     }
@@ -285,6 +286,7 @@
                 <input type="submit" value="Cadastrar" class="btnSubmitCadastrar"name="CadastrarColetor">
             </form>
             <?php
+                require_once('dados_coletores.php');
                     if(isset($_POST['CadastrarColetor'])){                        
                         inserir_coletor();
                     }
@@ -311,8 +313,10 @@
                     foreach ($registros as $registro) : ?>
                 <div class="row-table">
                     <div class="col-table actions">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        <i class="fa-solid fa-trash"></i>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                        <a href="index%2302.php?excluirEmpresa=<?= $registro['idColetor'] ?>">
+                            <i class="fa-solid fa-trash"name="excluirEmpresa"></i> 
+                        </a> 
                     </div>
                     <div class="col-table"><?php echo $registro['idColetor'] ?></div>
                     <div class="col-table"><?php echo $registro['nomeColetor'] ?></div>
@@ -325,7 +329,7 @@
                     <div class="col-table"><?php echo $registro['bairro'] ?></div>
                     <div class="col-table"><?php echo $registro['cep'] ?></div>
                     <div class="col-table"><?php echo $registro['cidade'] ?></div>
-                    <div class="col-table"><?php echo $registro['UF'] ?></div>
+                    <div class="col-table"><?php echo $registro['uf'] ?></div>
                 </div>
                 <?php endforeach ;
                         }
